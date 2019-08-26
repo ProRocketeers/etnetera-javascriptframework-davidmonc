@@ -40,7 +40,7 @@ public class JavaScriptFrameworkCommonDto {
         return deprecationDate;
     }
 
-    public void setDeprecationDate1(LocalDate deprecationDate) {
+    public void setDeprecationDate(LocalDate deprecationDate) {
         this.deprecationDate = deprecationDate;
     }
 
