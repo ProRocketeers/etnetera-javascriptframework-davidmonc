@@ -1,13 +1,7 @@
 spring:
   application.name: javascript-framework
   datasource:
-    url: jdbc:h2:~/javascriptframeworks;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
-    password: sa
-    username: password
-    driver-class-name: "org.h2.Driver"
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: update
+    url: jdbc:h2:mem:javascriptframeworks;DB_CLOSE_DELAY=-1;
   h2.console:
     enabled: true
     path: "/h2"

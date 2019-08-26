@@ -51,4 +51,10 @@ public class JavaScriptFrameworkCommonDto {
     public void setHypeLevel(int hypeLevel) {
         this.hypeLevel = hypeLevel;
     }
+
+    @Override
+    public String toString() {
+        return String.format("JavaScriptFrameworkCommonDto[name='%s', version='%s', deprecationDate='%s', hypeLevel=%d",
+                name, version, deprecationDate, hypeLevel);
+    }
 }

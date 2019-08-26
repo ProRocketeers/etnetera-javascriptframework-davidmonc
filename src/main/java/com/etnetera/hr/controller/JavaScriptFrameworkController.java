@@ -4,7 +4,7 @@ import com.etnetera.hr.dto.JavaScriptFrameworkInboundDto;
 import com.etnetera.hr.mapper.JavaScriptFrameworkMapper;
 import com.etnetera.hr.dto.JavaScriptFrameworkOutboundDto;
 import com.etnetera.hr.service.JavaScriptFrameworkService;
-import com.etnetera.hr.service.exception.EntityNotFoundException;
+import com.etnetera.hr.service.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

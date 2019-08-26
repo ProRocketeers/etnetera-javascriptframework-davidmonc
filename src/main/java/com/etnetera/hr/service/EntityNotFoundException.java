@@ -1,4 +1,4 @@
-package com.etnetera.hr.service.exception;
+package com.etnetera.hr.service;
 
 public class EntityNotFoundException extends RuntimeException {
 

@@ -2,7 +2,6 @@ package com.etnetera.hr.service;
 
 import com.etnetera.hr.model.JavaScriptFramework;
 import com.etnetera.hr.repository.JavaScriptFrameworkRepository;
-import com.etnetera.hr.service.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +12,23 @@ import java.util.Optional;
 @Component
 public class JavaScriptFrameworkServiceImpl implements JavaScriptFrameworkService {
 
+    private final JavaScriptFrameworkRepository repository;
+
     @Autowired
-    private JavaScriptFrameworkRepository repository;
+    public JavaScriptFrameworkServiceImpl(JavaScriptFrameworkRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void addJavaScriptFramework(JavaScriptFramework item) {
-        repository.save(item);
+        if (item != null) {
+            this.repository.save(item);
+        }
     }
 
     @Override
     public JavaScriptFramework getJavaScriptFramework(long id) {
-        Optional<JavaScriptFramework> optionalJavaScriptFramework = repository.findById(id);
+        Optional<JavaScriptFramework> optionalJavaScriptFramework = this.repository.findById(id);
         return optionalJavaScriptFramework.orElseThrow(() -> new EntityNotFoundException(id));
     }
 
@@ -34,7 +39,7 @@ public class JavaScriptFrameworkServiceImpl implements JavaScriptFrameworkServic
 
         newItem.setId(id);
 
-        repository.save(newItem);
+        this.repository.save(newItem);
     }
 
     @Override
@@ -42,13 +47,13 @@ public class JavaScriptFrameworkServiceImpl implements JavaScriptFrameworkServic
         // exists with not found exception
         getJavaScriptFramework(id);
 
-        repository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
     @Override
     public List<JavaScriptFramework> getJavaScriptFrameworks() {
         List<JavaScriptFramework> javaScriptFrameworks = new ArrayList<>();
-        repository.findAll().forEach(javaScriptFrameworks::add);
+        this.repository.findAll().forEach(javaScriptFrameworks::add);
         return javaScriptFrameworks;
     }
 }

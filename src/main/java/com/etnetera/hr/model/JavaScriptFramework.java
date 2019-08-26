@@ -26,6 +26,7 @@ public class JavaScriptFramework {
     @NotNull(message = "Please provide a hypeLevel")
     private int hypeLevel;
 
+    // private default constructor
     private JavaScriptFramework() {}
 
     private JavaScriptFramework(Builder b) {

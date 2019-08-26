@@ -1,6 +1,6 @@
 package com.etnetera.hr.controller;
 
-import com.etnetera.hr.service.exception.EntityNotFoundException;
+import com.etnetera.hr.service.EntityNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -51,10 +51,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
      * @return the ApiError object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage()/*"Malformed JSON request"*/, ex));
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            HttpMessageNotReadableException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+
+        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex));
     }
 
+    // other exceptions, could be removed when all exceptions are covered
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<Object> handleUnexpectedException(Exception ex) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
