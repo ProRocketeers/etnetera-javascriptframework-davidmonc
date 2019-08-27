@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
- * Holds the transfer obejct. Parent of inbound and outbound dtos.
+ * Holds the transfer object. Parent of inbound and outbound dtos.
  */
 public class JavaScriptFrameworkCommonDto {
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.time.format.DateTimeParseException;
 
 /**
- * Mapper for mapping in and out dto &lt;-&gt; domain java script framework
+ * Mapper for mapping in and out dto &lt;-&gt; domain java script framework.
  */
 @Component
 public class JavaScriptFrameworkMapper {

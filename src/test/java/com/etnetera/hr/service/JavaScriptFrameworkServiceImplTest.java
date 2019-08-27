@@ -62,7 +62,7 @@ public class JavaScriptFrameworkServiceImplTest {
     }
 
     @Test
-    public void getJavaScriptFramework_withExistingId_shouldReturnJavascriptFramework() {
+    public void getJavaScriptFramework_withExistingId_shouldReturnJavaScriptFramework() {
         JavaScriptFramework javaScriptFramework = createJavaScriptFramework();
         Mockito.when(javaScriptFrameworkRepositoryMock.findById(JAVASCRIPT_FRAMEWORK_ID)).thenReturn(Optional.of(javaScriptFramework));
 
@@ -80,7 +80,7 @@ public class JavaScriptFrameworkServiceImplTest {
     }
 
     @Test
-    public void updateJavaScriptFramework_withExistingId_shouldSaveNewJavascriptFramework() {
+    public void updateJavaScriptFramework_withExistingId_shouldSaveNewJavaScriptFramework() {
         JavaScriptFramework oldJsf = createJavaScriptFramework();
         JavaScriptFramework newJsf = createNewJavaScriptFramework();
         Mockito.when(javaScriptFrameworkRepositoryMock.findById(JAVASCRIPT_FRAMEWORK_ID)).thenReturn(Optional.of(oldJsf));
@@ -99,7 +99,7 @@ public class JavaScriptFrameworkServiceImplTest {
     }
 
     @Test
-    public void deleteJavaScriptFramework_withExistingId_shouldDeleteExistingJavascriptFramework() {
+    public void deleteJavaScriptFramework_withExistingId_shouldDeleteExistingJavaScriptFramework() {
         JavaScriptFramework javaScriptFramework = createJavaScriptFramework();
         Mockito.when(javaScriptFrameworkRepositoryMock.findById(JAVASCRIPT_FRAMEWORK_ID)).thenReturn(Optional.of(javaScriptFramework));
 

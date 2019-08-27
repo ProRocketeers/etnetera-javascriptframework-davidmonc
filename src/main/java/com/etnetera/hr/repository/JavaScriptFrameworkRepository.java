@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Interface defines few custom searchs by fields.
+ * Interface defines few custom searches by fields.
  */
 @Repository
 public interface JavaScriptFrameworkRepository extends CrudRepository<JavaScriptFramework, Long> {

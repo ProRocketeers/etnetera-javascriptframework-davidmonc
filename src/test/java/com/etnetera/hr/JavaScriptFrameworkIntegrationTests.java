@@ -14,8 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
-
 /**
  * Class used for Spring Boot/MVC based tests.
  */
@@ -180,6 +178,9 @@ public class JavaScriptFrameworkIntegrationTests {
         return dto;
     }
 
+    /**
+     * Test dto class, holds also deprecationDate as a String.
+     */
     class Dto {
         private String name;
         private String version;

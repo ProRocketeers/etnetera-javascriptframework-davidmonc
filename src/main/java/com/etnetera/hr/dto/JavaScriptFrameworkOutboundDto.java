@@ -1,7 +1,7 @@
 package com.etnetera.hr.dto;
 
 /**
- * Outbounds dto, has id for response.
+ * Outbounds dto, has id for the response.
  */
 public class JavaScriptFrameworkOutboundDto extends JavaScriptFrameworkCommonDto {
 

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Simple REST controller for accessing application logic.
+ * Simple REST controller for accessing javascript framework application logic.
  */
 @RestController
 @RequestMapping(path = "/frameworks")
