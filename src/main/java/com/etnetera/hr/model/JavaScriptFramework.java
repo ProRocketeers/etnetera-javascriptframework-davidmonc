@@ -20,7 +20,6 @@ public class JavaScriptFramework {
     private String name;
     @NotEmpty(message = "Please provide a version")
     private String version;
-    @NotNull(message = "Please provide a deprecationDate as string in format 'yyyy-MM-dd'")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate deprecationDate;
     @NotNull(message = "Please provide a hypeLevel")

@@ -13,7 +13,6 @@ public class JavaScriptFrameworkCommonDto {
     private String name;
     @NotEmpty(message = "Please provide a version")
     private String version;
-    @NotNull(message = "Please provide a deprecationDate1 as string in format 'yyyy-MM-dd'")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate deprecationDate;

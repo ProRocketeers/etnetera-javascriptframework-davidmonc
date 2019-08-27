@@ -131,6 +131,37 @@ public class JavaScriptFrameworkIntegrationTests {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
+    @Test
+    public void addFramework_withoutMandatoryFields_shouldReturnBadRequest() throws Exception {
+        // mandatory name
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/frameworks")
+                        .content(asJsonString(createDto(null, "1.1", "2019-08-26", 99)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        // mandatory version
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/frameworks")
+                        .content(asJsonString(createDto("abcd", null, "2019-08-26", 99)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    @DirtiesContext
+    public void addFramework_withoutNotMandatoryFields_shouldReturnCreated() throws Exception {
+        // not mandatory deprecationDate
+        this.mockMvc
+                .perform(MockMvcRequestBuilders.post("/frameworks")
+                        .content(asJsonString(createDto("no-deprecation-date", "1.1", null, 99)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
+    }
+
     private static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
