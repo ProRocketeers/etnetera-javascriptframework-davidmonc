@@ -72,7 +72,7 @@ public class JavaScriptFrameworkController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<JavaScriptFrameworkOutboundDto>> getJavaScriptFrameworks() {
         List<JavaScriptFrameworkOutboundDto> dtos = service.getJavaScriptFrameworks().stream()
                 .map(i -> mapper.fromJavaScriptFramework(i))
