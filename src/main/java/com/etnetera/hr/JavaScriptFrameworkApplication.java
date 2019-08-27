@@ -20,6 +20,10 @@ public class JavaScriptFrameworkApplication {
         SpringApplication.run(JavaScriptFrameworkApplication.class);
     }
 
+    /**
+     * Generates the swagger docket.
+     * @return Docket docket
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

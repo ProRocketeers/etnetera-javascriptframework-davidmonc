@@ -15,6 +15,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles common and few custom exceptions.
+ */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -44,9 +47,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * Handle HttpMessageNotReadableException. Happens when request JSON is malformed.
      *
-     * @param ex      HttpMessageNotReadableException
+     * @param ex HttpMessageNotReadableException
      * @param headers HttpHeaders
-     * @param status  HttpStatus
+     * @param status HttpStatus
      * @param request WebRequest
      * @return the ApiError object
      */

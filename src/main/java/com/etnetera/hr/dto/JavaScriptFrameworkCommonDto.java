@@ -7,6 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+/**
+ * Holds the transfer obejct. Parent of inbound and outbound dtos.
+ */
 public class JavaScriptFrameworkCommonDto {
 
     @NotEmpty(message = "Please provide a name")

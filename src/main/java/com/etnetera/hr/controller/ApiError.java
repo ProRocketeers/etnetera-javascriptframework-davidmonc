@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.http.HttpStatus;
 import java.time.LocalDateTime;
 
+/**
+ * Holds the error response visualized to clients.
+ */
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME, property = "error", visible = true)
 class ApiError {
 
