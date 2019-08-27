@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 /**
  * Simple REST controller for accessing application logic.
  */
-@RestController()
+@RestController
 @RequestMapping(path = "/frameworks")
 public class JavaScriptFrameworkController {
 
@@ -79,10 +79,5 @@ public class JavaScriptFrameworkController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
-    }
-
-    @GetMapping("/error")
-    public String errorEndpoint() throws EntityNotFoundException {
-        throw new EntityNotFoundException(15);
     }
 }
