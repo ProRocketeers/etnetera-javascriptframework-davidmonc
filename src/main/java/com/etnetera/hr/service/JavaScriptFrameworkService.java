@@ -4,6 +4,9 @@ import com.etnetera.hr.model.JavaScriptFramework;
 
 import java.util.List;
 
+/**
+ * Interface for service methods above java script framework domain object.
+ */
 public interface JavaScriptFrameworkService {
 
     void addJavaScriptFramework(JavaScriptFramework item);
@@ -14,5 +17,5 @@ public interface JavaScriptFrameworkService {
 
     void deleteJavaScriptFramework(long id);
 
-    List<JavaScriptFramework> getJavaScriptFrameworks();
+    List<JavaScriptFramework> getJavaScriptFrameworks(String name, String version);
 }

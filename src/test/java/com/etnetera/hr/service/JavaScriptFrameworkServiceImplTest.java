@@ -112,7 +112,7 @@ public class JavaScriptFrameworkServiceImplTest {
     public void getJavaScriptFrameworks_withEmptyRepository_shouldReturnEmptyList() {
         Mockito.when(javaScriptFrameworkRepositoryMock.findAll()).thenReturn(new ArrayList<>());
 
-        List<JavaScriptFramework> javaScriptFrameworks = javaScriptFrameworkService.getJavaScriptFrameworks();
+        List<JavaScriptFramework> javaScriptFrameworks = javaScriptFrameworkService.getJavaScriptFrameworks(null, null);
 
         assertThat(javaScriptFrameworks, is(notNullValue()));
         assertThat(javaScriptFrameworks.size(), is(0));
@@ -126,10 +126,93 @@ public class JavaScriptFrameworkServiceImplTest {
 
         Mockito.when(javaScriptFrameworkRepositoryMock.findAll()).thenReturn(javaScriptFrameworks);
 
-        List<JavaScriptFramework> result = javaScriptFrameworkService.getJavaScriptFrameworks();
+        List<JavaScriptFramework> result = javaScriptFrameworkService.getJavaScriptFrameworks(null, null);
 
         assertThat(result, is(notNullValue()));
         assertThat(result.size(), is(2));
+    }
+
+    @Test
+    public void getJavaScriptFrameworks_filterByName_shouldReturnList() {
+        List<JavaScriptFramework> javaScriptFrameworks = new ArrayList<>();
+        javaScriptFrameworks.add(createJavaScriptFramework());
+
+        Mockito.when(javaScriptFrameworkRepositoryMock.findByName(JAVASCRIPT_FRAMEWORK_NAME)).thenReturn(javaScriptFrameworks);
+
+        javaScriptFrameworkService.getJavaScriptFrameworks(JAVASCRIPT_FRAMEWORK_NAME, null);
+
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.times(1)).findByName(JAVASCRIPT_FRAMEWORK_NAME);
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByVersion(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByNameAndVersion(Mockito.anyString(), Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findAll();
+    }
+
+    @Test
+    public void getJavaScriptFrameworks_filterByVersion_shouldReturnList() {
+        List<JavaScriptFramework> javaScriptFrameworks = new ArrayList<>();
+        javaScriptFrameworks.add(createJavaScriptFramework());
+
+        Mockito.when(javaScriptFrameworkRepositoryMock.findByVersion(JAVASCRIPT_FRAMEWORK_VERSION)).thenReturn(javaScriptFrameworks);
+
+        javaScriptFrameworkService.getJavaScriptFrameworks(null, JAVASCRIPT_FRAMEWORK_VERSION);
+
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByName(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.times(1)).findByVersion(JAVASCRIPT_FRAMEWORK_VERSION);
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByNameAndVersion(Mockito.anyString(), Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findAll();
+    }
+
+    @Test
+    public void getJavaScriptFrameworks_filterByNameAndVersion_shouldReturnList() {
+        List<JavaScriptFramework> javaScriptFrameworks = new ArrayList<>();
+        javaScriptFrameworks.add(createJavaScriptFramework());
+
+        Mockito.when(javaScriptFrameworkRepositoryMock
+                .findByNameAndVersion(JAVASCRIPT_FRAMEWORK_NAME, JAVASCRIPT_FRAMEWORK_VERSION)).thenReturn(javaScriptFrameworks);
+
+        javaScriptFrameworkService.getJavaScriptFrameworks(JAVASCRIPT_FRAMEWORK_NAME, JAVASCRIPT_FRAMEWORK_VERSION);
+
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByName(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByVersion(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.times(1))
+                .findByNameAndVersion(JAVASCRIPT_FRAMEWORK_NAME, JAVASCRIPT_FRAMEWORK_VERSION);
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findAll();
+    }
+
+    @Test
+    public void getJavaScriptFrameworks_noFilter_shouldReturnList() {
+        List<JavaScriptFramework> javaScriptFrameworks = new ArrayList<>();
+        javaScriptFrameworks.add(createJavaScriptFramework());
+
+        Mockito.when(javaScriptFrameworkRepositoryMock
+                .findByNameAndVersion(null, null)).thenReturn(javaScriptFrameworks);
+
+        javaScriptFrameworkService.getJavaScriptFrameworks(null, null);
+
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByName(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByVersion(Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.never()).findByNameAndVersion(Mockito.anyString(), Mockito.anyString());
+        Mockito.verify(javaScriptFrameworkRepositoryMock, Mockito.times(1)).findAll();
+    }
+
+    @Test
+    public void findByRecognition_withNullNameAndNullVersion_shouldReturnNoFilterEnum() {
+        assertThat(javaScriptFrameworkService.findByRecognition(null, null), is(FindBy.NO_FILTER));
+    }
+
+    @Test
+    public void findByRecognition_withNameAndNullVersion_shouldReturnByNameFilterEnum() {
+        assertThat(javaScriptFrameworkService.findByRecognition(JAVASCRIPT_FRAMEWORK_NAME, null), is(FindBy.BY_NAME));
+    }
+
+    @Test
+    public void findByRecognition_withNullNameAndVersion_shouldReturnByVersionFilterEnum() {
+        assertThat(javaScriptFrameworkService.findByRecognition(null, JAVASCRIPT_FRAMEWORK_VERSION), is(FindBy.BY_VERSION));
+    }
+
+    @Test
+    public void findByRecognition_withNameAndVersion_shouldReturnByNameAndByVersionFilterEnum() {
+        assertThat(javaScriptFrameworkService.findByRecognition(JAVASCRIPT_FRAMEWORK_NAME, JAVASCRIPT_FRAMEWORK_VERSION), is(FindBy.BY_NAME_AND_VERSION));
     }
 
     private JavaScriptFramework createJavaScriptFramework() {
